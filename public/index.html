@@ -1,0 +1,86 @@
+<!doctype html>  
+
+<html lang="en" ng-app="angularProject">  
+
+<head>  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Página principal</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> 
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    <script src="main.js"></script>
+    <script src="node_modules/angular/angular.js"></script>
+</head>
+
+<body ng-controller="mainController">  
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h1>Lista de medidas</h1>
+            <h2>Elementos: {{ medidas.length }}</h2>
+        </div>
+
+        <!--<div class="row">
+            <div id="statistics-list">
+                <div id="medida-form" class="col-xs-6 col-sm-6">
+                    <h3>Temperatura media: </h3>
+                </div>
+                <div id="medida-form" class="col-xs-6 col-sm-6">
+                    <h3>Humedad media: </h3>
+                </div>
+            </div>
+        </div>-->
+
+        <div class="row">
+            <div id="medida-form" class="col-xs-6 col-sm-6">
+                <div class="col-sm-10 col-sm-offset-2 text-center">
+                    <h3>Nueva medida</h3>
+                    <form>
+                        <input type="number" class="form-control input-lg text-center" placeholder="Id del Dispositivo" ng-model="formData.Dispositivo">
+                        <input type="number" class="form-control input-lg text-center" placeholder="Temperatura" ng-model="formData.Temperatura">
+                        <input type="number" class="form-control input-lg text-center" placeholder="Humedad" ng-model="formData.Humedad">
+                        <input type="date" class="form-control input-lg text-center" placeholder="Fecha" ng-model="formData.Fecha">
+                        <button class="btn btn-primary btn-lg" ng-click="createMedida()">Insertar</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="medida-filter" class="col-xs-6 col-sm-6">
+                <div class="col-sm-10 col-sm-offset-2 text-center">
+                    <h3>Buscar medida</h3>
+                    <span class="Buscar medida"></span>
+                    <input ng-model="medidaBuscada.Dispositivo" class="form-control input-lg text-center" placeholder="Id del Dispositivo">
+                    <span class="Buscar medida"></span> 
+                    <input ng-model="medidaBuscada.Temperatura" class="form-control input-lg text-center" placeholder="Temperatura">
+                    <span class="Buscar medida"></span>
+                    <input ng-model="medidaBuscada.Humedad" class="form-control input-lg text-center" placeholder="Humedad">
+                    <span class="Buscar medida"></span> 
+                    <input ng-model="medidaBuscada.Fecha" class="form-control input-lg text-center" placeholder="Fecha">
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div id="medida-list" class="row">
+            <table class="table">
+                <tr>
+                    <th>Id del Dispositivo</th>
+                    <th>Temperatura</th>
+                    <th>Humedad</th>
+                    <th>Fecha</th>
+                    <th>Eliminar</th>
+                </tr>
+                <tr ng-repeat="medida in medidas | filter:medidaBuscada">
+                    <td>{{ medida.Dispositivo }}</td>
+                    <td>{{ medida.Temperatura }}</td>
+                    <td>{{ medida.Humedad }}</td>
+                    <td>{{ medida.Fecha }}</td>
+                    <td><input type="checkbox" ng-click="deleteMedida(medida._id)"></td>
+                </tr>
+            </table>
+         </div>
+    </div>
+</body>
+
+</html>
